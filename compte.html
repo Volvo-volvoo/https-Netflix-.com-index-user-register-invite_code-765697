@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Solde</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .balance-section {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 0 1 auto;
+        }
+
+        .balance-section h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .balance-details {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin: 20px 10px;
+            font-size: 18px;
+        }
+
+        .balance-details .column {
+            flex: 1;
+            text-align: center;
+        }
+
+        .balance-details .column:last-child {
+            flex: 0;
+        }
+
+        .balance-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .balance-item span {
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        .button-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            background-color: #ffffff;
+            margin: 20px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .button-section a {
+            text-decoration: none;
+        }
+
+        .button-section button {
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #00796b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-section button:hover {
+            background-color: #004d40;
+        }
+
+        .footer-nav {
+            background-color: #00796b;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section en haut avec le solde -->
+    <div class="balance-section">
+        <h1>VIP 0</h1>
+    </div>
+
+    <div class="balance-details">
+        <div class="column">
+            <div class="balance-item">
+                <span>Solde actuel</span>
+                <p> 00 FCFA</p>
+            </div>
+            <div class="balance-item">
+                <span>Solde de retrait</span>
+                <p> 00 FCFA</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="balance-item">
+                <span>Solde de rechargement</span>
+                <p> 00 FCFA</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section avec les boutons -->
+    <div class="button-section">
+        <a href="service.html"><button>Service client</button></a>
+        <a href="historique_de_paiement.html"><button>Historique de transaction</button></a>
+        <a href="historique-retrait.html"><button>Historique de retrait</button></a>
+        <a href="portefeuille.html"><button>Portefeuille</button></a>
+        <a href="ma_carte_de_retrait.html"><button>Ma carte</button></a>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="footer-nav">
+        <a href="identifiant.html">Accueil</a>
+        <a href="investir.html">Investir</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="compte.html">Compte</a>
+    </div>
+
+</body>
+</html>

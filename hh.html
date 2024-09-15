@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Retrait</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 350px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+        button {
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Retrait</h2>
+    <p>Frais de retrait 10%</p>
+    <form id="withdrawalForm">
+        <input type="number" id="amount" name="amount" placeholder="Montant à retirer (min 1,000 FCFA)" required>
+        <input type="password" id="withdrawalPassword" name="withdrawalPassword" placeholder="Mot de passe de retrait" required>
+        <button type="submit">Retirer</button>
+        <div id="error-message" class="error"></div>
+    </form>
+    <div class="info">
+        <p>1. Veuillez lier votre portefeuille avant de demander un virement sur votre compte.</p>
+        <p>2. Les jours de retrait sont du lundi au dimanche de 8h à 19h, pareil pour le rechargement.</p>
+        <p>3. Le montant minimum de retrait est de 600 FCFA.</p>
+        <p>4. Le montant maximum de retrait est de 500 000 FCFA.</p>
+        <p>5. La durée maximale de traitement du retrait est de 20 minutes à 1 heure.</p>
+        <p>6. En cas d'erreur, votre retrait sera rejeté.</p>
+    </div>
+</div>
+
+<script>
+    // Gestion de la soumission du formulaire de retrait
+    document.getElementById('withdrawalForm').onsubmit = function(event) {
+        event.preventDefault();
+
+        var amount = parseFloat(document.getElementById('amount').value);
+        var withdrawalPassword = document.getElementById('withdrawalPassword').value;
+        var errorMessage = document.getElementById('error-message');
+
+        // Réinitialiser le message d'erreur
+        errorMessage.textContent = '';
+
+        // Solde disponible fixe
+        var availableBalance = 500;
+
+        if (amount < 1000) {
+            errorMessage.textContent = "Le montant minimum pour un retrait est de 600 FCFA.";
+            return;
+        }
+
+        if (amount > availableBalance) {
+            errorMessage.textContent = "Solde insuffisant pour retirer " + amount + " FCFA. Solde disponible : 00 FCFA.";
+            return;
+        }
+
+        var fees = amount * 0.10; // Calcul des frais (10%)
+        var finalAmount = amount - fees; // Montant final après déduction des frais
+
+        // Stockage des informations de retrait dans le localStorage
+        var withdrawalData = {
+            amount: amount,
+            fees: fees,
+            finalAmount: finalAmount,
+            date: new Date().toLocaleString(),
+            status: 'En attente d\'approbation'
+        };
+
+        var withdrawalHistory = JSON.parse(localStorage.getItem('withdrawalHistory')) || [];
+        withdrawalHistory.push(withdrawalData);
+        localStorage.setItem('withdrawalHistory', JSON.stringify(withdrawalHistory));
+
+        // Redirection vers la page d'historique
+        window.location.href = 'historique-retrait.html';
+    };
+</script>
+
+</body>
+</html>

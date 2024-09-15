@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Historique de Paiement - RAMCHOC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fefefe;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .info {
+            border: 2px solid #d32f2f;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #fbe9e7;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info h2 {
+            margin: 0;
+            color: #d32f2f;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        p {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .delete-button {
+            background-color: #e57373;
+        }
+        .delete-button:hover {
+            background-color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Historique de Paiement - Netflix</h1>
+    </div>
+    <div class="container">
+        <div class="info" id="paymentInfo">
+            <h2>Détails du Paiement</h2>
+            <p><strong>Montant :</strong> <span id="montant">00 XOF</span></p>
+            <p><strong>Numéro de Paiement :</strong> <span id="numero">0000000000</span></p>
+            <p><strong>ID de Transaction :</strong> <span id="id_transaction">000000</span></p>
+            <p><strong>Date :</strong> <span id="date">00/00/0000</span></p>
+            <p><strong>Statut :</strong> <span id="statut">En cours</span></p>
+            <button type="button" class="delete-button" id="deleteButton">Supprimer l'historique</button>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour extraire les paramètres de l'URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                montant: params.get('montant'),
+                numero: params.get('numero'),
+                id_transaction: params.get('id_transaction'),
+                date: params.get('date'),
+                statut: params.get('statut')
+            };
+        }
+
+        // Remplir les champs avec les paramètres extraits
+        const { montant, numero, id_transaction, date, statut } = getQueryParams();
+
+        document.getElementById('montant').textContent = montant;
+        document.getElementById('numero').textContent = numero;
+        document.getElementById('id_transaction').textContent = id_transaction;
+        document.getElementById('date').textContent = date;
+        document.getElementById('statut').textContent = statut;
+
+        // Fonction pour supprimer l'historique
+        document.getElementById('deleteButton').addEventListener('click', function() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet historique de paiement ?')) {
+                // Récupérer les historiques depuis localStorage
+                let paymentHistories = JSON.parse(localStorage.getItem('paymentHistories')) || [];
+                
+                // Filtrer les paiements pour enlever celui sélectionné
+                paymentHistories = paymentHistories.filter(p => !(p.numero === numero && p.id_transaction === id_transaction));
+                
+                // Sauvegarder les paiements modifiés dans localStorage
+                localStorage.setItem('paymentHistories', JSON.stringify(paymentHistories));
+                
+                alert('L\'historique de paiement a été supprimé.');
+                window.location.href = 'historique_de_paiement.html'; // Rediriger vers la page d'accueil ou une autre page
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Identifiant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header-section {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            animation: fadeIn 1s ease-in-out;
+            text-align: center;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .button-container a {
+            text-decoration: none;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #00796b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #004d40;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mySlides {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .footer-nav {
+            background-color: #00796b;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <h1>Identifiant</h1>
+        <p id="id" style="font-size: 18px;">Chargement...</p>
+        <p id="email" style="font-size: 16px;">Chargement...</p>
+    </div>
+
+    <div class="info-section">
+        <p>Notre plateforme NOTFLIX est une plateforme à long terme. Vous pouvez investir et gagner des rendements par jour. Vous pouvez retirer vos fonds sans soucis.</p>
+        <p>Infos sur les retraits et le rechargement :</p>
+        <p>Vous pouvez effectuer votre retrait de 8h à 19h, pareil pour le rechargement.</p>
+        <p>Une fois que vous avez investi, veuillez me contacter avec une capture de votre compte VIP suivie de votre identifiant. Je vais vous ajouter au groupe NOTFLIX.</p>
+
+        <div class="button-container">
+            <a href="lien-recharge.html">
+                <button id="recharge">Recharge</button>
+            </a>
+            <a href="lien-retrait.html">
+                <button id="retrait">Retrait</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="slideshow-container">
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1">
+        </div>
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2">
+        </div>
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3">
+        </div>
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+4" alt="Image 4">
+        </div>
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+5" alt="Image 5">
+        </div>
+        <div class="mySlides">
+            <img src="https://via.placeholder.com/800x400?text=Image+6" alt="Image 6">
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="index.html">Accueil</a>
+        <a href="investir.html">Investir</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="compte.html">Compte</a>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("mySlides");
+            let slideIndex = 0;
+
+            function displaySlide(index) {
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[index].style.display = "block";
+            }
+
+            function nextSlide() {
+                displaySlide(slideIndex);
+                slideIndex = (slideIndex + 1) % slides.length;
+                setTimeout(nextSlide, 3000); // Change image every 3 seconds
+            }
+
+            displaySlide(slideIndex);
+            nextSlide();
+        }
+
+        window.onload = function() {
+            const id = getQueryParam('id');
+            const email = getQueryParam('email');
+
+            document.getElementById('id').textContent = id || 'Non spécifié';
+            document.getElementById('email').textContent = email || 'Non spécifié';
+
+            showSlides(); // Start the slideshow on page load
+        };
+    </script>
+</body>
+</html>

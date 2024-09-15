@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Investissements VIP - Design Coloré</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px #bdc3c7;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .invest-section {
+            background-color: #fff;
+            border: 5px solid #8e44ad;
+            border-radius: 20px;
+            width: 250px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .invest-section:hover {
+            transform: scale(1.05);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #8e44ad;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        .invest-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .invest-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: red;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 10px;
+            background-color: #8e44ad;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Investissements VIP</h1>
+    <div class="container">
+        <!-- VIP 1 -->
+        <div class="invest-section">
+            <h2>VIP 1</h2>
+            <p>Investir 7 500 FCFA</p>
+            <p>Revenus quotidiens : 600 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 18 600 FCFA</p>
+            <p>Bonus : 500 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 1')">Investir</button>
+        </div>
+
+        <!-- VIP 2 -->
+        <div class="invest-section">
+            <h2>VIP 2</h2>
+            <p>Investir 15 000 FCFA</p>
+            <p>Revenus quotidiens : 1 200 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 37 200 FCFA</p>
+            <p>Bonus : 1 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 2')">Investir</button>
+        </div>
+
+        <!-- VIP 3 -->
+        <div class="invest-section">
+            <h2>VIP 3</h2>
+            <p>Investir 30 000 FCFA</p>
+            <p>Revenus quotidiens : 2 500 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 77 500 FCFA</p>
+            <p>Bonus : 2 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 3')">Investir</button>
+        </div>
+
+        <!-- VIP 4 -->
+        <div class="invest-section">
+            <h2>VIP 4</h2>
+            <p>Investir 60 000 FCFA</p>
+            <p>Revenus quotidiens : 5 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 155 000 FCFA</p>
+            <p>Bonus : 5 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 4')">Investir</button>
+        </div>
+
+        <!-- VIP 5 -->
+        <div class="invest-section">
+            <h2>VIP 5</h2>
+            <p>Investir 120 000 FCFA</p>
+            <p>Revenus quotidiens : 10 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 310 000 FCFA</p>
+            <p>Bonus : 10 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 5')">Investir</button>
+        </div>
+
+        <!-- VIP 6 -->
+        <div class="invest-section">
+            <h2>VIP 6</h2>
+            <p>Investir 240 000 FCFA</p>
+            <p>Revenus quotidiens : 13 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 403 000 FCFA</p>
+            <p>Bonus : 20 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 6')">Investir</button>
+        </div>
+
+        <!-- VIP 7 -->
+        <div class="invest-section">
+            <h2>VIP 7</h2>
+            <p>Investir 480 000 FCFA</p>
+            <p>Revenus quotidiens : 26 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 806 000 FCFA</p>
+            <p>Bonus : 40 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 7')">Investir</button>
+        </div>
+
+        <!-- VIP 8 -->
+        <div class="invest-section">
+            <h2>VIP 8</h2>
+            <p>Investir 960 000 FCFA</p>
+            <p>Revenus quotidiens : 64 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 1 984 000 FCFA</p>
+            <p>Bonus : 80 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 8')">Investir</button>
+        </div>
+
+        <!-- VIP 9 -->
+        <div class="invest-section">
+            <h2>VIP 9</h2>
+            <p>Investir 1 920 000 FCFA</p>
+            <p>Revenus quotidiens : 124 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 3 844 000 FCFA</p>
+            <p>Bonus : 160 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 9')">Investir</button>
+        </div>
+
+        <!-- VIP 10 -->
+        <div class="invest-section">
+            <h2>VIP 10</h2>
+            <p>Investir 3 840 000 FCFA</p>
+            <p>Revenus quotidiens : 250 000 FCFA</p>
+            <p>Cycle : 31 jours</p>
+            <p>Total : 7 750 000 FCFA</p>
+            <p>Bonus : 400 000 FCFA</p>
+            <button class="invest-btn" onclick="showMessage('VIP 10')">Investir</button>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(vipLevel) {
+            alert("Solde insuffisant pour activer le niveau " + vipLevel);
+        }
+    </script>
+
+    <footer>
+        © 2024 Investissements VIP | Tous droits réservés
+    </footer>
+</body>
+</html>

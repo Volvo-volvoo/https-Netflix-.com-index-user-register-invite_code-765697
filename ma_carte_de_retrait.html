@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Ma Carte de Retrait</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #00796b;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        .reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #e53935;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-section">
+        <h2>Informations de Retrait</h2>
+
+        <p>Compte Bancaire : <span id="bankAccount" class="highlight"></span></p>
+        <p>Opérateur Sélectionné : <span id="operator" class="highlight"></span></p>
+        <p>Code de Retrait : <span id="withdrawCode" class="highlight"></span></p>
+
+        <button class="reset-btn" id="resetBankInfo">Réinitialiser le compte bancaire</button>
+    </div>
+
+    <script>
+        // Fonction pour obtenir les paramètres de l'URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Fonction pour afficher les informations sauvegardées ou nouvelles
+        function displayStoredInfo() {
+            const storedBankAccount = localStorage.getItem('bankAccount');
+            const storedOperator = localStorage.getItem('operator');
+            const storedWithdrawCode = localStorage.getItem('withdrawCode');
+
+            // Vérifier si des informations sont déjà stockées
+            if (storedBankAccount && storedOperator && storedWithdrawCode) {
+                document.getElementById('bankAccount').textContent = storedBankAccount;
+                document.getElementById('operator').textContent = storedOperator;
+                document.getElementById('withdrawCode').textContent = storedWithdrawCode;
+            } else {
+                // Si les informations ne sont pas stockées, récupérer depuis l'URL
+                const bankAccount = getQueryParam('bankAccount');
+                const operator = getQueryParam('operator');
+                const withdrawCode = getQueryParam('withdrawCode');
+
+                // Afficher les informations récupérées
+                document.getElementById('bankAccount').textContent = bankAccount;
+                document.getElementById('operator').textContent = operator;
+                document.getElementById('withdrawCode').textContent = withdrawCode;
+
+                // Sauvegarder les informations dans le localStorage
+                localStorage.setItem('bankAccount', bankAccount);
+                localStorage.setItem('operator', operator);
+                localStorage.setItem('withdrawCode', withdrawCode);
+            }
+        }
+
+        // Réinitialisation des informations du compte bancaire
+        document.getElementById('resetBankInfo').addEventListener('click', function() {
+            // Effacer les données du localStorage
+            localStorage.removeItem('bankAccount');
+            localStorage.removeItem('operator');
+            localStorage.removeItem('withdrawCode');
+
+            // Réinitialiser les champs d'affichage
+            document.getElementById('bankAccount').textContent = '';
+            document.getElementById('operator').textContent = '';
+            document.getElementById('withdrawCode').textContent = '';
+
+            alert("Les informations de votre compte bancaire ont été réinitialisées.");
+        });
+
+        // Appel à la fonction d'affichage au chargement de la page
+        window.onload = displayStoredInfo;
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Page de Dépôts - RAMCHOC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fefefe;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #d32f2f; /* Rouge foncé */
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+        .header a {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            background-color: #b71c1c; /* Rouge plus foncé pour le bouton */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .wallet {
+            border: 2px solid #d32f2f;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #fbe9e7; /* Rouge très clair */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .wallet h2 {
+            margin: 0;
+            color: #d32f2f;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .payment-options {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .payment-options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .payment-options input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #d32f2f; /* Rouge foncé */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b71c1c; /* Rouge plus foncé */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="javascript:history.back()">Retour</a>
+        <h1> Dépôts - Netflix</h1>
+    </div>
+    <div class="container">
+        <div class="wallet">
+            <h2>Total de Recharge</h2>
+            <p>00 XOF</p>
+            <h2>Montant à Payer</h2>
+            <div class="form-group">
+                <label for="montant">Saisir le Montant</label>
+                <input type="number" id="montant" name="montant" placeholder="Entrez le montant" required>
+            </div>
+            <div class="payment-options">
+                <label><input type="radio" name="paiement" value="mtn" required> MTN</label>
+                <label><input type="radio" name="paiement" value="moov"> MOOV</label>
+                <label><input type="radio" name="paiement" value="orange"> Orange</label>
+                <label><input type="radio" name="paiement" value="wave"> WAVE</label>
+            </div>
+            <button type="button" onclick="submitForm()">Déposez maintenant</button>
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            const montant = document.getElementById('montant').value;
+            const paiement = document.querySelector('input[name="paiement"]:checked');
+            
+            if (!paiement) {
+                alert('Veuillez sélectionner un mode de paiement.');
+                return;
+            }
+            
+            const paiementValue = paiement.value;
+            let numero = '';
+            
+            switch (paiementValue) {
+                case 'mtn':
+                    numero = '225 0554049897';
+                    break;
+                case 'moov':
+                    numero = '225 0140719995';
+                    break;
+                case 'orange':
+                    numero = '225 0703037591';
+                    break;
+                case 'wave':
+                    numero = '225 0703037591';
+                    break;
+            }
+            
+            const url = `payment.html?montant=${montant}&numero=${encodeURIComponent(numero)}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

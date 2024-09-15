@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Register Netflix.com</title>
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 350px;
+            animation: scaleIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a11cb;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        /* Style des inputs */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Style du bouton */
+        .btn-submit {
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #4c0bbd;
+            transform: scale(1.05);
+        }
+
+        /* Animation d'entrée */
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .toggle-link a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container" id="signup-container">
+        <h1>Inscription</h1>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Créez un mot de passe" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirmer le mot de passe</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
+            </div>
+            <div class="form-group">
+                <label for="referral">Code de parrainage</label>
+                <input type="text" id="referral" name="referral" readonly>
+            </div>
+            <button type="submit" class="btn-submit">S'inscrire</button>
+        </form>
+        <div class="toggle-link">
+            <a href="#" id="show-login">Déjà inscrit ? Connectez-vous</a>
+        </div>
+    </div>
+
+    <div class="form-container" id="login-container" style="display: none;">
+        <h1>Connexion</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-email">E-mail</label>
+                <input type="email" id="login-email" name="login-email" placeholder="Entrez votre e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Mot de passe</label>
+                <input type="password" id="login-password" name="login-password" placeholder="Entrez votre mot de passe" required>
+            </div>
+            <button type="submit" class="btn-submit">Se connecter</button>
+        </form>
+        <div class="toggle-link">
+            <a href="#" id="show-signup">Pas encore inscrit ? Inscrivez-vous</a>
+        </div>
+    </div>
+
+    <script>
+        // Générer automatiquement un code de parrainage aléatoire
+        function generateReferralCode() {
+            const referralCode = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('referral').value = referralCode;
+        }
+
+        // Appeler la fonction de génération de code au chargement de la page
+        window.onload = generateReferralCode;
+
+        // Enregistrer les données d'inscription dans le stockage local et rediriger vers la page d'identifiant
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const referral = document.getElementById('referral').value;
+
+            if (password === confirmPassword) {
+                localStorage.setItem('user', JSON.stringify({
+                    email: email,
+                    password: password,
+                    referral: referral
+                }));
+
+                const uniqueId = generateUniqueId();
+                window.location.href = `identifiant.html?id=${uniqueId}&email=${encodeURIComponent(email)}`;
+            } else {
+                alert('Les mots de passe ne correspondent pas !');
+            }
+        });
+
+        // Vérifier les données de connexion et rediriger vers la page d'identifiant
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const loginEmail = document.getElementById('login-email').value;
+            const loginPassword = document.getElementById('login-password').value;
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (user && user.email === loginEmail && user.password === loginPassword) {
+                const uniqueId = generateUniqueId();
+                window.location.href = `identifiant.html?id=${uniqueId}&email=${encodeURIComponent(loginEmail)}`;
+            } else {
+                alert('E-mail ou mot de passe incorrect.');
+            }
+        });
+
+        // Fonction pour générer un identifiant unique
+        function generateUniqueId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        // Afficher le formulaire de connexion et masquer le formulaire d'inscription
+        document.getElementById('show-login').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
+
+        // Afficher le formulaire d'inscription et masquer le formulaire de connexion
+        document.getElementById('show-signup').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Historique des Retraits</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-header {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .item-detail {
+            margin-top: 5px;
+            color: #555;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+        }
+        .delete {
+            background-color: #dc3545;
+        }
+        .delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Historique des Retraits</h2>
+    <ul id="historyList"></ul>
+</div>
+
+<script>
+    // Fonction pour charger l'historique des retraits
+    function loadWithdrawalHistory() {
+        var withdrawalHistory = JSON.parse(localStorage.getItem('withdrawalHistory')) || [];
+        var historyList = document.getElementById('historyList');
+
+        historyList.innerHTML = '';
+        withdrawalHistory.forEach(function(entry, index) {
+            var listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <div>
+                    <div class="item-header">Montant: ${entry.amount} FCFA</div>
+                    <div class="item-detail">Frais: ${entry.fees} FCFA</div>
+                    <div class="item-detail">Montant Final: ${entry.finalAmount} FCFA</div>
+                    <div class="item-detail">Date: ${entry.date}</div>
+                    <div class="item-detail">Statut: ${entry.status}</div>
+                </div>
+                <div class="buttons">
+                    <button class="delete" onclick="deleteWithdrawal(${index})">Supprimer</button>
+                </div>
+            `;
+            historyList.appendChild(listItem);
+        });
+    }
+
+    // Fonction pour supprimer un retrait
+    function deleteWithdrawal(index) {
+        var withdrawalHistory = JSON.parse(localStorage.getItem('withdrawalHistory')) || [];
+        withdrawalHistory.splice(index, 1); // Supprimer l'élément à l'index spécifié
+        localStorage.setItem('withdrawalHistory', JSON.stringify(withdrawalHistory));
+        loadWithdrawalHistory(); // Rafraîchir la liste
+    }
+
+    // Charger l'historique des retraits au démarrage
+    loadWithdrawalHistory();
+</script>
+
+</body>
+</html>
